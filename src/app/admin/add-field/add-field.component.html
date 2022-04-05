@@ -1,0 +1,19 @@
+<div >
+    <h2>Add Field</h2>
+    <br>
+    <form (ngSubmit)="add(form)" #form=ngForm>
+      <div class="form-group">
+    
+        <label for="name" >Name</label>
+        <input class="form-control" ngModel type="text" minlength="2" style="width:400px;"  name="nom" required #nom="ngModel">
+        <span style=color:red *ngIf="!nom.valid && nom.touched">Invalid Name!</span>
+      </div>
+    <br>
+          <button  [disabled]=!form.valid><span class="fa fa-plus-square" aria-hidden="true" ></span></button>
+       
+    </form>
+    <br>
+    <br>
+    <hr>
+    
+    </div>

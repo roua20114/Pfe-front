@@ -1,0 +1,64 @@
+
+<html>
+<body>
+  <!-- partial -->
+  <div class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+    <app-header></app-header>
+<app-sidebar></app-sidebar>
+    
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Fileds</h4>
+                
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let o of fields ">
+                        <td>{{o.name}}</td>
+                        <td><button (click)="delete(o._id)" style="border-radius: 3px;border: none; background: red" > <span class="fa fa-trash"></span></button>
+                        </td>
+                        
+                      </tr>
+                     
+                      
+                      
+                      
+                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+         
+      
+    
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <app-footer></app-footer>
+  <!-- page-body-wrapper ends -->
+</div>
+</div>
+
+
+</div>
+</body>
+</html>
+
+
