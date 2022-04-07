@@ -1,4 +1,4 @@
 export interface Field {
-    _id:number;
+    id:number;
     name:string;
 }

@@ -13,16 +13,16 @@ export class ServiceService {
 
   constructor( private client: HttpClient) { }
   public getAllField():Observable<Field[]>{
-    return this.client.get<Field[]>(this.host+'/findfield');
+    return this.client.get<Field[]>(this.host+"/findfield");
   }
   public addField(f:any): Observable<void>{
-    return this.client.post<void>(this.host+'/create',f);
+    return this.client.post<void>(this.host+"/create",f);
   }
   public getFieldByPubId(i:number):Observable<Field>{
     return this.client.get<Field>(this.host+i)
   }
-  public deleteField(_id:number):Observable<void>{
-    return this.client.delete<void>(this.host+_id);
+  deleteField(id:number):Observable<void>{
+    return this.client.delete<void>(this.host+id);
   }
   public updateField(f:any):Observable<void>{
     return this.client.put<void>(this.host,f);

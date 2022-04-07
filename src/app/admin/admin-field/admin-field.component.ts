@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ServiceService } from '../../AdminService/service.service';
 import { Field } from '../../model/field';
 
@@ -10,21 +10,32 @@ import { Field } from '../../model/field';
 })
 export class AdminFieldComponent implements OnInit {
 
-  constructor( private ser: ServiceService , private router:Router) { }
+  constructor( private ser: ServiceService , private router:Router, private ar: ActivatedRoute) { }
   fields!:Field[];
   field!:Field[];
+  fieldd!:Field;
   id!:number;
 
 
+
   ngOnInit(): void {
+    this.ar.paramMap.subscribe((params:Params)=>{ 
+      this.id=+params['get']('id');
+      
+        });
+
+
     this.ser.getAllField().subscribe(data=>{
       this.fields=data
       this.field=data
     })
   }
 
-  delete(_id:number){
-     this.ser.deleteField(_id).subscribe(()=>window.location.reload())
+  delete(i:number){
+     this.ser.deleteField(i).subscribe(()=>window.location.reload())
+  }
+  update(){
+    this.ser.updateField(this.fieldd).subscribe(()=>window.location.reload())
   }
   set x(s:string){
     this.fields=this.filtrer(s)

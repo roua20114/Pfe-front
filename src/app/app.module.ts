@@ -3,18 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { SignComponent } from './sign/sign.component';
+
+
 import { ResetComponent } from './reset/reset.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import{HttpClientModule} from '@angular/common/http';
 
-import { ProfilCadidatComponent } from './profil-cadidat/profil-cadidat.component';
+
 
 import { CvComponent } from './cv/cv.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
-import { AddPubComponent } from './add-pub/add-pub.component';
+import { AddPubComponent } from './entreprise/add-pub/add-pub.component';
 import { UpdatePubComponent } from './update-pub/update-pub.component';
 
 import{ MatFormFieldModule} from '@angular/material/form-field';
@@ -24,62 +24,73 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import{MatToolbarModule} from '@angular/material/toolbar';
 import { SignUpComponent } from './admin/sign-up/sign-up.component';
 import { ProfilComponent } from './admin/profil/profil.component';
-import { PubsComponent } from './pubs/pubs.component';
+import { PubsComponent } from './admin/pubs/pubs.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminFieldComponent } from './admin/admin-field/admin-field.component';
 
-import { LoginEComponent } from './login-e/login-e.component';
-import { SignEComponent } from './sign-e/sign-e.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { UserComponent } from './user/user.component';
-import { UserProfilComponent } from './user-profil/user-profil.component';
-import { AuthGuard } from './auth/auth.guard';
+import { LoginEComponent } from './entreprise/login-e/login-e.component';
+import { SignEComponent } from './entreprise/sign-e/sign-e.component';
+
+
+
+
 import { TableUserComponent } from './admin/table-user/table-user.component';
 
-import { TablePostsComponent } from './admin/table-posts/table-posts.component';
+
 import { AddFieldComponent } from './admin/add-field/add-field.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { UpdateFieldComponent } from './admin/update-field/update-field.component';
+import { ContratAdminComponent } from './admin/contrat-admin/contrat-admin.component';
+import { UpdateOfferComponent } from './admin/update-offer/update-offer.component';
+import { CandidatureComponent } from './entreprise/candidature/candidature.component';
+import { TestComponent } from './entreprise/test/test.component';
+import { UpdateTestComponent } from './entreprise/update-test/update-test.component';
+import { FooterCComponent } from './acceuil/footer-c/footer-c.component';
+import { HeaderCComponent } from './acceuil/header-c/header-c.component';
+import { LayoutCComponent } from './acceuil/layout-c/layout-c.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ProfilCanComponent } from './candidat/profil-can/profil-can.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignComponent,
     ResetComponent,
     AcceuilComponent,
-   
-    ProfilCadidatComponent,
- 
     CvComponent,
     EntrepriseComponent,
     AddPubComponent,
     UpdatePubComponent,
-  
     SignUpComponent,
     ProfilComponent,
     PubsComponent,
     AdminComponent,
     AdminFieldComponent,
-   
     LoginEComponent,
     SignEComponent,
-    FileUploadComponent,
-    UserComponent,
-    UserProfilComponent,
+  
     TableUserComponent,
-   
-    TablePostsComponent,
     AddFieldComponent,
     HeaderComponent,
     SidebarComponent,
     HomeComponent,
     FooterComponent,
-    LayoutComponent
+    LayoutComponent,
+    UpdateFieldComponent,
+    ContratAdminComponent,
+    UpdateOfferComponent,
+    CandidatureComponent,
+    TestComponent,
+    UpdateTestComponent,
+    FooterCComponent,
+    HeaderCComponent,
+    LayoutCComponent,
+    AboutUsComponent,
+    ProfilCanComponent
     
   ],
   imports: [
@@ -96,7 +107,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     ],
   providers: [
  
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},AuthGuard
+    
 
   ],
   bootstrap: [AppComponent]
