@@ -35,7 +35,9 @@ export class SignEComponent implements OnInit {
       region:['',Validators.required],
       sector:['',Validators.required],
       tel:['',Validators.required],
-      type:['',Validators.required]
+      type:['',Validators.required],
+      logo:[''],
+
 
 
     })
@@ -50,15 +52,21 @@ export class SignEComponent implements OnInit {
       email:['',Validators.compose([Validators.required,Validators.email])],
       password:['',Validators.required],
       tel:[''],
+      gender:[''],
+      logo:[''],
+      BirthdDate:['']
+
 
     })
     
   }
   registerCompany(){
+    console.log(this.RecruiterRegisterForm.controls['description']);
+    
     // if(this.RecruiterRegisterForm.controls['password']!=this.RecruiterRegisterForm.controls['confirm']){
     //   console.log("Password does not match ")
     // }
-    this.service.recruiter_register(JSON.stringify(this.RecruiterRegisterForm.value)).subscribe(res=>{
+    this.service.recruiter_register(this.RecruiterRegisterForm.value).subscribe(res=>{
       if(res==null){
         alert("Registration failed");
       }else{
