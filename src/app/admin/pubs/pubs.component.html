@@ -1,179 +1,88 @@
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Tables</title>
-
-  <!-- Custom fonts for this template -->
-  <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
-  <!-- Custom styles for this page -->
-  <link href="/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</head>
-
-
-
-
-
-
-
-
-<body id="page-top">
 
     <!-- Page Wrapper -->
-    <div id="wrapper">
+    
       <app-header>
   
       </app-header>
      
-      
-  
-  
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-  
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-        <p class="mb-4"> <a target="_blank" href="https://datatables.net"></a></p>
-  
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <ul>
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-  
-                    <tr>
-  
-                      <th>
-                        Title
-                      </th>
-                      <th>
-                          Description
-                      </th>
-                      <th>
-                          Field
-                      </th>
-                      <th>
-                          Qualifications
-                      </th>
-                      <th>
-                          Job Type
-                      </th>
-                      <th>
-                          Technologies Required
-                      </th>
-                      <th>
-                          Diploma Required
-                      </th>
+      <div class="container mt-5">
+    <div class="d-flex justify-content-center row" *ngFor="let o of pub">
+        <div class="col-md-8">
+            <div class="d-flex flex-column comment-section" id="myGroup">
+                <div class="bg-white p-2">
+                  
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">{{o.logo}}
+                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{o.username}}</span><span class="date text-black-50">{{o.created_at}}</span></div>
+                        <div class="box-tools">
+                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" data-bs-toggle="modal" data-bs-target="#exampleModal" routerLink="/UpdateOffer/{{o._id}}"><i class="typcn typcn-edit  text-primary"></i></button><button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" ><i i class="typcn typcn-archive text-danger" (click)="delete(o._id)"></i></button>
+                          
+                        </div>
+                          
+                       
+                    </div>
+                    <div class="mt-2">
+                      <strong><p class="comment-text" >{{o.title}}</p></strong>
+                      <strong><p class="comment-text" >Category:{{o.fields}}</p></strong>
+                      <strong><p class="comment-text" > Description:{{o.description}}</p></strong>
+                        <strong><p class="comment-text"> Job Nature:{{o.jobType}}</p></strong>
+                        <strong><p class="comment-text"> Technologies Required :{{o.technologiesReq}}</p></strong>
+                        <strong><p class="comment-text"> Qualifications :{{o.qualifications}}</p></strong>
+                        <strong><p class="comment-text"> Diplomas Required :{{o.diplomaReq}}</p></strong>
+                        <strong><p class="comment-text"> Places Available:{{o.placesAvai}}</p></strong>
+                        <strong><p class="comment-text"> Location:{{o.region}}</p></strong>
+                        <strong><p class="comment-text"> Expiration Date:{{o.expirationDate}}</p></strong>
+                        
 
-                      <th>
-                          Region
-                      </th>
-                      <th>
-                          Places Available
-                      </th>
-                      <th>
-                          Creation Date 
-                      </th>
-                      <th>
-                          Expiration Date
-                      </th>
-                      
-                      <th>
-                        Action
-  
-                      </th>
-  
-                    </tr>
-  
-                  </thead>
-  
-  
-                  <tbody>
-                    <tr *ngFor="let o of pub">
-                      <td>
-                        {{o.title}}
-  
-                      </td>
-                      <td>
-                          {{o.description}}
-                      </td>
-                      <td>
-                          {{o.fields}}
-                      </td>
-                      <td>
-                          {{o.qualifications}}
-                      </td>
-                      <td>
-                          {{o.jobType}}
-                      </td>
-                      <td>
-                          {{o.technologiesReq}}
-                      </td>
-                      <td>
-                          {{o.diplomaReq}}
-                      </td>
-                      <td>
-                          {{o.region}}
-                      </td>
-                      <td>
-                          {{o.placesAvai}}
-                      </td>
-                      <td>
-                          {{o.creationDate}}
-                      </td>
-                      <td>
-                          {{o.expirationDate}}
-                      </td>
-                      <td>
-                        <button class="btn btn-danger btn-circle btn-sm" (click)="delete(o.id)">
-                          <i class="fas fa-trash">
-  
-                          </i>
-                        </button>
-                      </td>
-  
-                    </tr>
-                  </tbody>
-                </table>
-              </ul>
+                    </div>
+                    </div>
+            
+                
+                <div class="bg-white p-2">
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span></div>
+                        <div class="like p-2 cursor action-collapse" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" href="#collapse-1"><i class="fa fa-commenting-o"></i><span class="ml-1">Comments</span></div>
+                       
+                    </div>
+                </div>
+                
+                 <div id="collapse-1" class="bg-light p-2 collapse" data-parent="#myGroup">
+                    <div class="d-flex flex-row align-items-start">
+                      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                      <textarea class="form-control ml-1 shadow-none textarea" ></textarea></div>
+                    <div class="mt-2 text-right">
+                      <button class="btn btn-primary btn-sm shadow-none" type="submit" >Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                  </div>
+              
+               
             </div>
-          </div>
         </div>
-  
-      </div>
-     
-      
-    
-    
-  
-      <app-footer></app-footer>
-   
-  
-  
-    
-  
     </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   
   
+   
+        
+     
+
   
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -188,7 +97,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
+              <span aria-hidden="true"></span>
             </button>
           </div>
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -197,26 +106,12 @@
             <a class="btn btn-primary" href="login.html">Logout</a>
           </div>
         </div>
-      </div>
+      
     </div>
+   </div> 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
 
-    <!-- Core plugin JavaScript-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
-    
-
-    <script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    
-
-    <!-- Page level custom scripts -->
-    <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     
-  </body>
+ 

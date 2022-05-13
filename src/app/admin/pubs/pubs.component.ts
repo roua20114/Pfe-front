@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs';
-import { Field } from '../../model/field';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
+
+
+import { ServiceService } from 'src/app/admin/AdminService/service.service';
+import { Comments } from 'src/app/model/comments';
+import { Field } from 'src/app/model/field';
+
 import { Pub } from '../../model/pub';
-import { ServiceGService } from '../../service/service-g.service';
+import { ServiceGService } from '../../entreprise/service/service-g.service';
 
 
 @Component({
@@ -11,34 +16,50 @@ import { ServiceGService } from '../../service/service-g.service';
   styleUrls: ['./pubs.component.css']
 })
 export class PubsComponent implements OnInit {
+  
 
-  constructor(private service: ServiceGService) { }
+  constructor(private service: ServiceGService,private ser:ServiceService ) { }
   pub!: Pub[];
   pubs!:Pub[];
-  id!:number;
-  p!:Pub;
-  f!:Field;
+  token:any
+  
+  
+  id:any
+  field!:Field[]
+  fieldss!:Field[]
+  fields!:Field;
+  comments!:Comment
 
   ngOnInit(): void {
     this.service.getAllPubs().subscribe(data=>{
       
+      
       this.pub=data
-      console.log('pub',this.pub)
-      for(let i=0; i<this.pub.length; i++){
-        this.service.getFieldByPubId(this.pub[i].id).subscribe(e=>{
+      for (let i = 0; i < this.pub.length; i++) {
+        this.ser.getFieldById(this.pub[i]._id).subscribe(e=>{
           if(e!=null)
-          this.pub[i].fields=e.name
-
+            this.pub[i].fields=e.name
+          
+            else
+            this.pub[i].fields="Aucune catégorie"
+            
+        
         })
-      }
+    }
+      
 
     
     this.pubs=this.pub;})
-  }
   
- delete(id:number){
-   console.log('id',id)
-  //  this.service.deletePub(id).subscribe(()=>{window.location.reload()})
+    
+  }
+  add= new FormGroup({
+    comment:new FormControl('')
+  })
+  
+ delete(id:any){
+   
+  this.service.deletePub(id).subscribe(()=>{window.location.reload()})
  }
  
  filtrer(ss:string){
@@ -48,4 +69,12 @@ export class PubsComponent implements OnInit {
   this.pub = this.filtrer(s)
  }
 
+ deleteCom(id:any){
+   this.ser.deleteComment(id).subscribe(()=>{window.location.reload()})
  }
+
+
+
+ }
+
+

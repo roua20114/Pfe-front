@@ -1,67 +1,128 @@
-<div style="background-image: url();">
-    <h2 style="color: firebrick;">Add a Job Offer </h2>
-    <br>
-    <form (ngSubmit)="ajouter(form)" #form=ngForm>
-      <div class="form-group">
-    
-        <label for="title" style="color:black; font-size: large; font-style: oblique;">Title</label>
-        <input class="form-control"  ngModel type="text"  style="width:400px;"  name="title" required #title="ngModel">
-        <span style=color:red *ngIf="!title.valid && title.touched">Invalid Title!</span>
-    
-    <br>
-        <label for="field" style="color:black; font-size: large; font-style: oblique;">Field</label>
-        <select class="form-control" ngModel style="width:400px;" name="field"  required #field="ngModel">
-            <option *ngFor="let f of fields " [value]="f.id">{{f.name}}</option>
-        </select>
-        <span style=color:red *ngIf="!field.valid && field.touched">Invalid Field !</span>
-     
-        <br>
-        
-        <label for="place" style="color: black; font-size: large; font-style: oblique;">Localisation</label>
-        <input class="form-control" ngModel type="text" min="0" style="width:400px;"  name="place" required #place="ngModel">
-        <span style=color:red *ngIf="!place.valid && place.touched">Invalid Localisation!</span>
-    <br>
-        <label for="tech" style="color: black; font-size: large; font-style: oblique;">Technologies Required</label>
-        <input  class="form-control"  ngModel type="text"  style="width:400px;"  name="tech" required #tech="ngModel">
-        <span style=color:red *ngIf="!tech.valid && tech.touched">Invalid Technologies!</span>
-       
-        
-    <br>    
-        <label for="date" style="color: black; font-size: large; font-style: oblique;" >Date</label>
-        <input  class="form-control"  ngModel type="datetime"  style="width:400px;"  name="date" required #date="ngModel">
-        <span style=color:red *ngIf="!date.valid && date.touched">Invalid date!</span>
-    
-    <br>
-    
-     
-    
-      
-    
-        <label for="diplome" style="color: black; font-size: large; font-style: oblique;">Diploma Required</label>
-        <input  class="form-control"  ngModel type="text"  style="width:400px;"  name="diplome" required #diplome="ngModel">
-        <span style=color:red *ngIf="!diplome.valid && diplome.touched">Invalid Diploma!</span>
-
-        <br>
-
-        <label for="des" style="color: black; font-size: large; font-style: oblique;">Description</label>
-        <input  class="form-control"  ngModel type="text"  style="width:400px;"  name="des" required #des="ngModel">
-        <span style=color:red *ngIf="!des.valid && des.touched">Invalid Description!</span>
-    <br>
-        <label for="qua" style="color: black; font-size: large; font-style: oblique;">Qualifications</label>
-        <input  class="form-control"  ngModel type="text"  style="width:400px;"  name="qua" required #qua="ngModel">
-        <span style=color:red *ngIf="!qua.valid && qua.touched">Invalid Qualifications!</span>
-       
-       
-       
+<div class="col-12 grid-margin" style="background-color:white;">
+    <div class="card" style="background-color: #F0FFFF;">
+      <div class="card-body">
+        <h4 class="card-title">Update Your Post</h4>
+        <form class="form-sample" #f="ngForm" (ngSubmit)="update()">
+          <p class="card-description">
+            
+          </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="title" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" ngModel [(ngModel)]="publication.title" required name="title" #title="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Qualifications</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control"  ngModel [(ngModel)]="publication.qualifications" required name="qualifications"  #qualifications="ngModel" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+         
           
-        
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Created At</label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="date" placeholder="dd/mm/yyyy" ngModel [(ngModel)]="publication.created_at" name="created_at" #creates_at="ngModel"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Job Type</label>
+                <div class="col-sm-9">
+                   
+               
+                  <input type="text" class="form-control" ngModel [(ngModel)]="publication.jobType" name="jobType" #jobType="ngModel"/>
+                </div>
+                    
+             
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Expires At </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="date" placeholder="dd/mm/yyyy" ngModel [(ngModel)]="publication.expirationDate" name="expirationDate" #expirationDate="ngModel"/>
+                </div>
+              
+            
+               
+                <div class="col-sm-5">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="card-description">
+            Address
+          </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Diploma Required</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" ngModel [(ngModel)]="publication.diplomaReq" name="diplomaReq" #diplomaReq="ngModel"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-9">
+                  <textarea type="text" class="form-control" ngModel [(ngModel)]="publication.description" name="description" #description="ngModel" ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Technologies Required</label>
+                <div class="col-sm-9">
+                  <textarea type="text" class="form-control" ngModel [(ngModel)]="publication.technologiesReq" name="technologiesReq" #technologiesReq="ngModel" ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Places Available</label>
+                <div class="col-sm-9">
+                  <input type="number" class="form-control"  ngModel [(ngModel)]="publication.placesAvai" name="placesAvai" #placesAvai="ngModel" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Location</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" ngModel [(ngModel)]="publication.region" name="region" #region="ngModel" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-9">
+                    <button type="submit" class="form-control" style="color:black; background-color:pink" >Confirm</button>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-      
-      
-    
-    <br>
-          <button  class="btn btn-success" [disabled]=!form.valid>  Post</button>
-       
-    </form>
     </div>
-    
+  </div>

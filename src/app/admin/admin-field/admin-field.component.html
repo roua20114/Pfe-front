@@ -9,12 +9,16 @@
     
     <!-- partial -->
     <div class="main-panel">
+      
       <div class="content-wrapper">
         <div class="row">
+          <input  class="form-control me-2" type="search" [(ngModel)]="x" placeholder="search">
           <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
+             
               <div class="card-body">
-                <h4 class="card-title">Fileds</h4>
+                <h4 class="card-title">Fields</h4>
+                
                 
                 <div class="table-responsive">
                   <table class="table">
@@ -28,8 +32,9 @@
                     <tbody>
                       <tr *ngFor="let o of fields ">
                         <td>{{o.name}}</td>
-                        <td><button (click)="delete(o.id)" style="border-radius: 3px;border: none; background: red" ><span class="fa fa-trash"></span></button>
-                        </td>
+                        <td><button (click)="delete(o._id)" style="border-radius: 3px;border: none; background: red" ><span class="fa fa-trash"></span></button>
+                        <td><button style="border-radius: 4px;border: none; background: rgb(214, 201, 201);margin-top: 4px;" ><a routerLink="/updateField/{{o._id}}"><span class="fa fa-edit"></span></a></button></td>
+                        
                         
                       </tr>
                      
@@ -44,8 +49,9 @@
             </div>
           </div>
        
+          <app-add-field></app-add-field>
          
-      
+     
     
       <!-- partial -->
     </div>

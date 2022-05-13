@@ -1,15 +1,20 @@
 <div >
     <h2>Add Field</h2>
     <br>
-    <form (ngSubmit)="add(form)" #form=ngForm>
+    <form [formGroup]="addField" (ngSubmit)="add()">
       <div class="form-group">
     
         <label for="name" >Name</label>
-        <input class="form-control" ngModel type="text" minlength="2" style="width:400px;"  name="nom" required #nom="ngModel">
-        <span style=color:red *ngIf="!nom.valid && nom.touched">Invalid Name!</span>
+        <input class="form-control" id="field"  type="text" formControlName="field" placeholder="Name"  required>
+        <div *ngIf=" f['field'].touched && f['field'].touched" class="invalid-feedback">
+          <div *ngIf="f['field'].errors && f['field'].errors['required']">Name is required</div>
+        </div>
+
+        
+        
       </div>
     <br>
-          <button  [disabled]=!form.valid><span class="fa fa-plus-square" aria-hidden="true" ></span></button>
+          <button type="submit"  [disabled]="addField?.invalid">Add</button>
        
     </form>
     <br>

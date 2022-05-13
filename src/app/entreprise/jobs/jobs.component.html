@@ -1,0 +1,311 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+        <div class="container">
+          <div class="page-header">
+              <h1 id="timeline">Timeline</h1>
+          </div>
+          <ul class="timeline">
+              <li class="timeline-inverted">
+                <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
+                <div class="timeline-panel">
+                  <form role="form" [formGroup]="add">
+                    <div class="timeline-heading">
+                      <div class="form-group">
+                        <label for="title" >title</label>
+                        <input type="text" class="form-control" placeholder="Title" formControlName="title">
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">text</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="description"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Qualifications</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="qualifications"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Technologies Required</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="technologiesReq"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Diploma Required</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="diplomaReq"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Job Type</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="jobType"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Region</label>
+                        <textarea class="form-control"  placeholder="text" rows="3" formControlName="region"></textarea>
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Places Available</label>
+                        <input class="form-control"  placeholder="text" rows="3" formControlName="placesAvai" type="number">
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Created</label>
+                        <input class="form-control"  placeholder="text" rows="3" formControlName="created_at" type="date">
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      <div class="form-group">
+                        <label for="Text">Expires At</label>
+                        <input class="form-control"  placeholder="text" rows="3" formControlName="expirationDate" type="date">
+                      </div>
+                    </div>
+                    <div class="timeline-body">
+                      
+                    </div>
+                      <div class="ploc-tags">
+                        <div class="pull-right">
+                         <select formControlName="fields" >Categories
+                           <option  *ngFor="let f of field" [value]="f._id">{{f.name}}</option>
+
+                         </select> 
+                        </div>
+                      </div>
+                      <br />
+                      <br />
+                      <button type="submit" class="btn btn-success btn-lg btn-block" (click)="addPub()">send</button>
+                  </form>                
+                </div>
+              </li>
+              <li>
+                
+                <div class="timeline-panel" *ngFor="let p of publication">
+                  <div class="timeline-heading">
+                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        
+                      <div class="box-tools">
+                        <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" data-bs-toggle="modal" data-bs-target="#exampleModal" routerLink="/addpub/{{p._id}}"><i class="typcn typcn-edit  text-primary"></i></button><button type="button" class="btn btn-outline-secondary btn-rounded btn-icon" ><i i class="typcn typcn-archive text-danger" (click)="delete(p._id)"></i></button>
+                        
+                      </div>
+                        
+                     
+                  </div>
+                
+                  
+                    <h4 class="timeline-title">{{p.title}}</h4>
+                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{p.created_at}}</small></p>
+                  </div>
+                  
+                  <div class="timeline-body" >
+                   
+                   
+                      
+                    <p>Description:{{p.description}}</p>
+                    <p>Qualifications:{{p.qualifications}}</p>
+                    <p>Diploma Required:{{p.diplomaReq}}</p>
+                    <p>Technologies Required:{{p.technologiesReq}}</p>
+                    <p>Places Available:{{p.placesAvai}}</p>
+                    <p>Region:{{p.region}}</p>
+                    <p>Category:{{p.fields}}</p>
+                    <p>Job Type :{{p.jobType}}</p>
+                    <p>Expires AT:{{p.expirationDate}}</p>
+
+                     <div>
+                      
+                    </div>     
+                  </div>
+                  <hr>
+                  <div class="timeline-footer">
+                   <div>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                          <ul class="chat">
+                              <li class="left clearfix"><span class="chat-img pull-left">
+                                  <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                              </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header">
+                                          <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                              <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                      </div>
+                                      <p>
+                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                          dolor, quis ullamcorper ligula sodales.
+                                      </p>
+                                  </div>
+                              </li>
+                              <li class="right clearfix"><span class="chat-img pull-right">
+                                  <img src="http://placehold.it/50/FA6F57/fff&text=RGB" alt="User Avatar" class="img-circle" />
+                              </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header">
+                                          <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                          <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                      </div>
+                                      <p>
+                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                          dolor, quis ullamcorper ligula sodales.
+                                      </p>
+                                  </div>
+                              </li>
+                              <li class="left clearfix"><span class="chat-img pull-left">
+                                  <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                              </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header">
+                                          <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                              <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                      </div>
+                                      <p>
+                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                          dolor, quis ullamcorper ligula sodales.
+                                      </p>
+                                  </div>
+                              </li>
+                              <li class="right clearfix"><span class="chat-img pull-right">
+                                  <img src="http://placehold.it/50/FA6F57/fff&text=RGB" alt="User Avatar" class="img-circle" />
+                              </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header">
+                                          <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                          <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                      </div>
+                                      <p>
+                                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                          dolor, quis ullamcorper ligula sodales.
+                                      </p>
+                                  </div>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="panel-footer">
+                          <div class="input-group">
+                              <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                              <span class="input-group-btn">
+                                  <button class="btn btn-warning btn-sm" id="btn-chat">
+                                      Send</button>
+                              </span>
+                          </div>
+                      </div>
+                    </div>
+                   </div>
+                  </div>
+                </div>
+              </li>
+              <li class="timeline-inverted">
+                <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <h4 class="timeline-title">Mussum ipsum cacilds</h4>
+                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/09/2014</small></p>
+                  </div>
+                  <div class="timeline-body">
+                    <p>Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Interagi no mé, cursus quis, vehicula ac nisi. Aenean vel dui dui. Nullam leo erat, aliquet quis tempus a, posuere ut mi. Ut scelerisque neque et turpis posuere pulvinar pellentesque nibh ullamcorper. Pharetra in mattis molestie, volutpat elementum justo. Aenean ut ante turpis. Pellentesque laoreet mé vel lectus scelerisque interdum cursus velit auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac mauris lectus, non scelerisque augue. Aenean justo massa.</p>
+                     <div>
+                     <div class="pull-right"><span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
+                      <span class="label label-danger">Danger</span></div>
+                    </div>     
+                  </div>
+                  <hr>
+                  <div class="timeline-footer">
+                      <div class="panel panel-primary">
+                          <div class="panel-heading" id="accordion">
+                              <span class="label label-danger">5</span>
+                              <span class="glyphicon glyphicon-comment"></span> Chat
+                              <div class="btn-group pull-right">
+                                  <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                      <span class="glyphicon glyphicon-chevron-down"></span>
+                                  </a>
+                              </div>
+                          </div>
+                      <div class="panel-collapse collapse" id="collapseOne">
+                          <div class="panel-body">
+                              <ul class="chat">
+                                  <li class="left clearfix"><span class="chat-img pull-left">
+                                      <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                  </span>
+                                      <div class="chat-body clearfix">
+                                          <div class="header">
+                                              <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                                  <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                          </div>
+                                          <p>
+                                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                              dolor, quis ullamcorper ligula sodales.
+                                          </p>
+                                      </div>
+                                  </li>
+                                  <li class="right clearfix"><span class="chat-img pull-right">
+                                      <img src="http://placehold.it/50/FA6F57/fff&text=RGB" alt="User Avatar" class="img-circle" />
+                                  </span>
+                                      <div class="chat-body clearfix">
+                                          <div class="header">
+                                              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                              <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                          </div>
+                                          <p>
+                                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                              dolor, quis ullamcorper ligula sodales.
+                                          </p>
+                                      </div>
+                                  </li>
+                                  <li class="left clearfix"><span class="chat-img pull-left">
+                                      <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                                  </span>
+                                      <div class="chat-body clearfix">
+                                          <div class="header">
+                                              <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                                                  <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                          </div>
+                                          <p>
+                                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                              dolor, quis ullamcorper ligula sodales.
+                                          </p>
+                                      </div>
+                                  </li>
+                                  <li class="right clearfix"><span class="chat-img pull-right">
+                                      <img src="http://placehold.it/50/FA6F57/fff&text=RGB" alt="User Avatar" class="img-circle" />
+                                  </span>
+                                      <div class="chat-body clearfix">
+                                          <div class="header">
+                                              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                              <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                          </div>
+                                          <p>
+                                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+                                              dolor, quis ullamcorper ligula sodales.
+                                          </p>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="panel-footer">
+                              <div class="input-group">
+                                  <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                  <span class="input-group-btn">
+                                      <button class="btn btn-warning btn-sm" id="btn-chat">
+                                          Send</button>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+          </ul>
+      </div>
+
+

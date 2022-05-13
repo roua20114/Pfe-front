@@ -1,7 +1,10 @@
+import { NumberSymbol } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -10,26 +13,72 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login-e.component.css']
 })
 export class LoginEComponent implements OnInit {
-  form!:FormGroup;
+  token:any
+  a!:boolean
+  role:any
+  loginForm!:FormGroup
+  
 
-  constructor( private formBuilder: FormBuilder ,private http:HttpClient,private router:Router) {
+  constructor( private formBuilder: FormBuilder ,private router:Router,private service:ServiceGService,private auth:AuthService) {
     
-   }
+   
+   this.loginForm=this.formBuilder.group({
+    email:["", Validators.compose([Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"),Validators.required])],
+    password:['',Validators.required],
+   
+   })
+  }
   
 
   ngOnInit(): void {
-    this.form=this.formBuilder.group({
-      email:'',
-      password:''
-    })
+    this.a=true
+   
   }
-  submit():void{
-    console.log(this.form.getRawValue)
-    this.http.post('http://localhost:3000/api/auth/login',this.form.getRawValue(),{
-      withCredentials:true
-
-    }).subscribe(()=>this.router.navigate(['/profil']))
+  login(){
+    {
+      this.service.login(this.loginForm.value).subscribe((res:any)=>{
+        if(res.admin.role=="company"){
+          
+          this.auth.login(res.admin.role,res.token)
+          localStorage.setItem('CurrentUser',res.admin._id)
+          this.router.navigate(['/profilE'])
+        }
+        if(res.admin.role=="admin"){
+    
+          this.router.navigate(['/'])
+          this.auth.login(res.admin.role,res.token)
+          localStorage.setItem('CurrentUser',res.admin._id)
+        
+        }
+        else if(res.admin.role=="candidat"){
+          this.router.navigate(['/acceuil'])
+          this.auth.login(res.admin.role,res.token)
+          localStorage.setItem('CurrentUser',res.candidat._id)
+        }
+      },err=>{
+        console.log("Invalid Password or Email");
+        this.a=false
+        
+      })
+      
+        
+         
+  
+        
+        
+  
+      
+      
+      
+      
+    }
   }
+    
+     
+ 
+  
+  
+ 
   
 
    

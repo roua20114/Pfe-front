@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ServiceService } from '../../AdminService/service.service';
-import { Field } from '../../model/field';
+import { ToastrService } from 'ngx-toastr';
+import { Field } from 'src/app/model/field';
+
+import { ServiceService } from '../AdminService/service.service';
+
 
 @Component({
   selector: 'app-admin-field',
@@ -10,33 +13,31 @@ import { Field } from '../../model/field';
 })
 export class AdminFieldComponent implements OnInit {
 
-  constructor( private ser: ServiceService , private router:Router, private ar: ActivatedRoute) { }
+  constructor( private ser: ServiceService , private router:Router, private ar: ActivatedRoute, private toastr:ToastrService) { }
   fields!:Field[];
   field!:Field[];
   fieldd!:Field;
-  id!:number;
-
+  id:any;
+  
 
 
   ngOnInit(): void {
-    this.ar.paramMap.subscribe((params:Params)=>{ 
-      this.id=+params['get']('id');
-      
-        });
-
-
+   
     this.ser.getAllField().subscribe(data=>{
-      this.fields=data
-      this.field=data
+     this.fields=data
+     this.field=data
     })
   }
 
-  delete(i:number){
-     this.ser.deleteField(i).subscribe(()=>window.location.reload())
+  delete(id:any){
+   
+   
+    this.ser.deleteField(id).subscribe(()=>
+    window.location.reload()
+   )
+     
   }
-  update(){
-    this.ser.updateField(this.fieldd).subscribe(()=>window.location.reload())
-  }
+  
   set x(s:string){
     this.fields=this.filtrer(s)
   }

@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ServiceService } from '../../AdminService/service.service';
-import { Field } from '../../model/field';
-import { ServiceGService } from '../../service/service-g.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Field } from 'src/app/model/field';
+import { Pub } from 'src/app/model/pub';
+import { AuthService } from 'src/app/service/auth.service';
+import { ServiceService } from '../../admin/AdminService/service.service';
+
+import { ServiceGService } from '../service/service-g.service';
 
 @Component({
   selector: 'app-add-pub',
@@ -11,22 +15,45 @@ import { ServiceGService } from '../../service/service-g.service';
   styleUrls: ['./add-pub.component.css']
 })
 export class AddPubComponent implements OnInit {
-
-  constructor( private service:ServiceGService,private ser:ServiceService, private router:Router) {
+ 
+ fields!:Field
+ id:any
+    f!:Field[]
+publication!:Pub
+    
+    
+  constructor( private auth:AuthService,private service:ServiceGService,private ser:ServiceService, private router:Router,private ar:ActivatedRoute,private toaster:ToastrService) {
+   
     
   }
-  fields!:Field[];
+ 
 
   ngOnInit(): void {
-    this.ser.getAllField().subscribe(data=>{this.fields=data;
+    this.ser.getAllField().subscribe(data=>{this.f=data;
       console.log(data)});
+      this.ar.paramMap.subscribe((params:Params)=>{
+        this.id=params['get']('id')
+        this.service.getPubById(this.id).subscribe(data=>{
+          this.publication=data
+          
+        })
+      })
+    
+    
 
   }
-  ajouter(f:NgForm){
-    console.log(f.value)
-     this.service.addpub(f.value).subscribe(()=>
-      this.router.navigate(['/pubs']))
+  update(){
+    this.toaster.success("Fields Updated Successfully")
+
+    return this.service.updatePub(this.id,this.publication).subscribe(()=>this.router.navigate(['/jobs']))
   }
+ 
+
+
+
+
+  
+
 }
 
 
