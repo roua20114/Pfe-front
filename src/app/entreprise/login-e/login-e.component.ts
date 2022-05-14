@@ -41,6 +41,8 @@ export class LoginEComponent implements OnInit {
           
           this.auth.login(res.admin.role,res.token)
           localStorage.setItem('CurrentUser',res.admin._id)
+          localStorage.setItem('UserData',JSON.stringify(res.admin))
+
           this.router.navigate(['/profilE'])
         }
         if(res.admin.role=="admin"){

@@ -6,6 +6,8 @@ import { Field } from 'src/app/model/field';
 import { Pub } from 'src/app/model/pub';
 import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
 import * as  $ from "jquery"
+import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profil-e',
@@ -14,7 +16,7 @@ import * as  $ from "jquery"
 })
 export class ProfilEComponent implements OnInit {
 
-  constructor( private ser: ServiceService,private service: ServiceGService) { 
+  constructor( private router: Router,private inject:Injector,private ser: ServiceService,private service: ServiceGService) { 
     this.url="http://localhost:5000/api/user"
   }
   pub!: Pub[];
@@ -42,18 +44,15 @@ export class ProfilEComponent implements OnInit {
   comments!:Comment
   ngOnInit(): void {
     this.service.getAllPubs().subscribe(data=>{
-      
-      
+      let authService=this.inject.get(ServiceGService)
+      this.profileinfo=authService.getUserData()
+      if(!this.profileinfo){
+        this.router.navigateByUrl('/acceuil/loginE');
+
+      }
+      //data of profile can be found in profileinfo
       this.pub=data
-    //   for (let i = 0; i < this.pub.length; i++) {
-    //     this.ser.getFieldById(this.pub[i].id).subscribe(e=>{
-    //       if(e!=null)
-    //         this.pub[i].fields=e.name
-    //         else
-    //         this.pub[i].fields="Aucune catégorie"
-    //     })
-    // }
-      
+
 
     
     this.pubs=this.pub;})

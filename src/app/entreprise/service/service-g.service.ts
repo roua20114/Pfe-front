@@ -76,16 +76,14 @@ export class ServiceGService {
     }
     return this.http.get(this.host+'/getAll')
   }
-  // postjob(body:any)
-  // {
-  //   const httOptions={
-  //     headers: new HttpHeaders({
-  //       'Content-Type':'application/json',
-  //       'Authorization': this.gettoken()||''
-  //     })
-  //   }
-  //   return this.http.post(this.host+'/addOffer',body,httOptions)
-  // }
+  getUserData(){
+    var data=localStorage.getItem('UserData')||''
+    if(data==''){
+      return false
+    }else{
+      return JSON.parse(data)
+    }
+  }
  
   logout(){
     localStorage.removeItem('token')

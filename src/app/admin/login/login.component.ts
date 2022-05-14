@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.aserv.login(this.signinForm.value).subscribe((res:any)=>{
       if(res.admin.role=="company"){
-        
         this.auth.login(res.admin.role,res.token)
         localStorage.setItem('CurrentUser',res.admin._id)
         this.router.navigate(['/profilE'])

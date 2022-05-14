@@ -271,8 +271,7 @@ table p {
 /*-------- Spacing Style Css --------*/
 .container,
 .container-fluid {
-  padding-bottom: 90px;
-  padding-top: 113px;
+
 }
 @media only screen and (max-width: 1199px) {
   .container,
