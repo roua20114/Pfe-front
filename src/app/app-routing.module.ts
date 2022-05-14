@@ -47,9 +47,11 @@ import { NavbarComponent } from './entreprise/navbar/navbar.component';
 
 const routes: Routes = [
   {path:'acceuil', component:AcceuilComponent,children:[{path:'',component:LayoutCComponent},
+  {path:"signE",component:SignEComponent},
+  {path:"loginE",component:LoginEComponent},{path:"about",component:AboutUsComponent},
  ]},
   {path:"login", component:LoginComponent},
-  {path:'about',component:AboutUsComponent},
+
   {path:'description/:id',component:DescriptionComponent},
   {path:"reset", component:ResetComponent},
   {path:"cv", component:CvComponent},
@@ -60,8 +62,7 @@ const routes: Routes = [
   {path:"pubupdate",component:UpdatePubComponent},
   {path:"field",component:AdminFieldComponent},
   {path:"addField",component:AddFieldComponent},
-  {path:"signE",component:SignEComponent},
-  {path:"loginE",component:LoginEComponent},
+  
   {path:"navbar",component:NavbarComponent},
   {path:"jobs",component:JobsComponent},
     
