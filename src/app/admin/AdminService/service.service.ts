@@ -55,5 +55,6 @@ export class ServiceService {
     return this.client.post(this.host+'/auth/login',data)
   
   }
+  
 
 }

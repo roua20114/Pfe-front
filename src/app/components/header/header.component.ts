@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { ServiceService } from 'src/app/admin/AdminService/service.service';
 import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
 
 @Component({
@@ -7,11 +8,12 @@ import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  username:any
+ 
 
-  constructor(private service:ServiceGService) { }
+  constructor() { }
 
   ngOnInit(): void {
+    
     
   }
 
