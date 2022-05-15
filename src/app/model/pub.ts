@@ -10,13 +10,13 @@ export class Pub {
     technologiesReq:string;
     diplomaReq:string;
     placesAvai:string;
-    logo:string;
+    logo?:string;
     created_at:string;
     expirationDate:Date;
-    username:string
+    username?:string
     // comment:string
     
-    image:string
+    image?:string
 
     fields:string;
   

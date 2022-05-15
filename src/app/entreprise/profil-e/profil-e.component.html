@@ -1,4 +1,4 @@
-<app-header-c></app-header-c>
+<!-- <app-header-c></app-header-c> -->
 <div class="container bootstrap snippets bootdey">
 <div class="row">
   <div class="profile-nav col-md-3">
@@ -21,11 +21,106 @@
   </div>
   <div class="profile-info col-md-9">
       <div class="panel">
-          <form>
-              <textarea placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area"></textarea>
+          <form >
+              <textarea (change)="doTextareaValueChange($event)"  placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area">{{tempName}}</textarea>
           </form>
           <footer class="panel-footer">
-              <button class="btn btn-warning pull-right">Post</button>
+              <button class="btn btn-warning pull-right " data-toggle="modal" data-target="#exampleModal"  >Post</button>
+              <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Make New Job Offer</h5>
+                      <button type="button" class="close ClosePost" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" [formGroup]="add">
+                            <div class="timeline-heading">
+                              <div class="form-group">
+                                <label for="title" >title</label>
+                                <input type="text" class="form-control" placeholder="Title" formControlName="title">
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">text</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="description"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Qualifications</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="qualifications"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Technologies Required</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="technologiesReq"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Diploma Required</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="diplomaReq"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Job Type</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="jobType"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Region</label>
+                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="region"></textarea>
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Places Available</label>
+                                <input class="form-control"  placeholder="text" rows="3" formControlName="placesAvai" type="number">
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Created</label>
+                                <input class="form-control"  placeholder="text" rows="3" formControlName="created_at" type="date">
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+                              <div class="form-group">
+                                <label for="Text">Expires At</label>
+                                <input class="form-control"  placeholder="text" rows="3" formControlName="expirationDate" type="date">
+                              </div>
+                            </div>
+                            <div class="timeline-body">
+
+                            <div class="form-group">
+                                <label  for="exampleSelect">Categories</label>
+                                <select formControlName="fields"  class="form-control" id="exampleSelect">
+                                    <option  *ngFor="let f of field" [value]="f._id">{{f.name}}</option>
+
+                                </select>
+                            </div>
+                            </div>
+
+                       
+                              <br />
+                              <br />
+                              <button type="submit" class="btn btn-success btn-lg btn-block" (click)="addPub()">send</button>
+                          </form>    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary " data-dismiss="modal" >Cancel</button>
+                      <button  type="submit" class="btn btn-primary" (click)="addPub()">Post</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <ul class="nav nav-pills">
                   <li>
                       <a href="#"><i class="fa fa-map-marker"></i></a>

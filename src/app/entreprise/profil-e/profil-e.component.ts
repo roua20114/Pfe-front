@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup ,Validators} from '@angular/forms';
 import { ServiceService } from 'src/app/admin/AdminService/service.service';
 import { Comments } from 'src/app/model/comments';
 import { Field } from 'src/app/model/field';
@@ -8,7 +8,8 @@ import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
 import * as  $ from "jquery"
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
+import * as bootstrap from "bootstrap"
 @Component({
   selector: 'app-profil-e',
   templateUrl: './profil-e.component.html',
@@ -16,9 +17,10 @@ import { Router } from '@angular/router';
 })
 export class ProfilEComponent implements OnInit {
 
-  constructor( private router: Router,private inject:Injector,private ser: ServiceService,private service: ServiceGService) { 
+  constructor(private router: Router,private inject:Injector,private ser: ServiceService,private service: ServiceGService) { 
     this.url="http://localhost:5000/api/user"
   }
+
   pub!: Pub[];
   pubs!:Pub[];
   field!:Field[]
@@ -37,12 +39,27 @@ export class ProfilEComponent implements OnInit {
     public itemsPerPage:any
     public publications!: Pub[];
     public showImage:any
-  
+    public tempName:string="";
   id:any
   p!:Pub;
-  
+  add=new FormGroup({
+    title:new FormControl('',[Validators.required]),
+    description:new FormControl('',[Validators.required]),
+    fields:new FormControl('',[Validators.required]),
+    qualifications:new FormControl('',[Validators.required]),
+    placesAvai:new FormControl('',[Validators.required]),
+    diplomaReq: new FormControl('',[Validators.required]),
+    technologiesReq: new FormControl('',[Validators.required]),
+    jobType:new FormControl('',[Validators.required]),
+    region:new FormControl('',[Validators.required]),
+    created_at:new FormControl('',[Validators.required]),
+    expirationDate:new FormControl('',[Validators.required]),
+  })
   comments!:Comment
   ngOnInit(): void {
+    this.ser.getAllField().subscribe(data=>{
+      this.field=data;
+    });
     this.service.getAllPubs().subscribe(data=>{
       let authService=this.inject.get(ServiceGService)
       this.profileinfo=authService.getUserData()
@@ -50,22 +67,73 @@ export class ProfilEComponent implements OnInit {
         this.router.navigateByUrl('/acceuil/loginE');
 
       }
-      //data of profile can be found in profileinfo
+ 
       this.pub=data
-
-
-    
     this.pubs=this.pub;})
-    // this.getprofile()
+    
+   
   }
+
   set x(s:string){
     this.pub=this.filtrer(s)
   }
   filtrer(ss:string){
     return this.pub.filter(x =>x.title.toUpperCase().indexOf(ss.toUpperCase())!=-1)
   }
+  doSomething(){
+    if(this.tempName!==""){
+    // this.service.addpub(this.tempName).subscribe(data=>{
+    //   if(data){
+    //     alert(data.data)
+    //   }else{
+    //     alert(data.data)
+
+    //   }
+    // })
+    }
+  }
+  doTextareaValueChange(ev:any){
+    try {
+      this.tempName = ev.target.value;
+    } catch(e) {
+      console.info('could not set textarea-value');
+    }
+  }
   
-  
+  addPub(){
+    const PUB: Pub={
+      title: this.add.get('title')?.value,
+      description: this.add.get('description')?.value,
+      fields: this.add.get('fields')?.value,
+      qualifications: this.add.get('qualifications')?.value,
+      placesAvai: this.add.get('placesAvai')?.value,
+      diplomaReq: this.add.get('diplomaReq')?.value,
+      technologiesReq: this.add.get('technologiesReq')?.value,
+      jobType: this.add.get('jobType')?.value,
+      region: this.add.get('jobType')?.value,
+      created_at: this.add.get('created_at')?.value,
+      expirationDate:this.add.get('expirationDate')?.value,
+    }
+    console.log(PUB)
+    this.service.addpub(PUB).subscribe((data)=>{
+      $('.ClosePost').trigger('click')
+      if(data.message=="success"){
+        Swal.fire(
+          'Posted!',
+          'Your Job offer has been listed',
+          'success'
+        )
+
+      }else{
+        Swal.fire(
+          'Oops',
+          'Something went off :( ',
+          'error'
+        )
+      }
+    }
+    )
+  }
   
 
   

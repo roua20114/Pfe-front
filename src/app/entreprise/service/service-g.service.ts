@@ -29,7 +29,7 @@ export class ServiceGService {
     return this.http.get<Pub>(this.host+'/'+id);
   }
   public addpub(publication:any):Observable<any>{
-    
+
     return this.http.post(this.host +"/addOffer",publication)
   }
   public deletePub(id:any):Observable<any>{
@@ -83,6 +83,10 @@ export class ServiceGService {
     }else{
       return JSON.parse(data)
     }
+  }
+  WriteApost(data:string){
+
+
   }
  
   logout(){
