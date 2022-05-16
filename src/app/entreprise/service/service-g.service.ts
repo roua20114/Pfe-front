@@ -108,6 +108,10 @@ export class ServiceGService {
       return false
     }
   }
+  public editProfile(id:any,b:any):Observable<void>{
+    return this.http.put<void>(this.app+'/user/'+id,b)
+
+  }
 }
   
   

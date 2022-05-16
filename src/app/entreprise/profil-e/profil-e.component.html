@@ -1,217 +1,298 @@
-<!-- <app-header-c></app-header-c> -->
+<app-header-c></app-header-c>
 <div class="container bootstrap snippets bootdey">
-<div class="row">
-  <div class="profile-nav col-md-3">
-      <div class="panel">
-          <div class="user-heading round">
-              <a href="#">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
-              </a>
-              <h1>{{profileinfo.companyName}}</h1>
-              <p>{{profileinfo.email}}</p>
-          </div>
-
-          <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
-              <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
-              <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
-              <li><a href="#"> <i class="fa fa-plus" routerLink="/jobs"></i> Add new post </a></li>
-          </ul>
-      </div>
+  <div class="row">
+    <div class="profile-nav col-md-3">
+        <div class="panel">
+            <div class="user-heading round">
+                <a href="#">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                </a>
+                <h1>{{profileinfo.companyName}}</h1>
+                <p>{{profileinfo.email}}</p>
+            </div>
+  
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
+                <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                <form >
+                  <textarea (change)="doTextareaValueChange($event)"  placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area">{{tempName}}</textarea>
+              </form>
+                <li><i class="fa fa-plus" data-toggle="modal" data-target="#exampleModal" ></i> Add new post </li>
+                <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Make New Job Offer</h5>
+                        <button type="button" class="close ClosePost" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form role="form" [formGroup]="add">
+                              <div class="timeline-heading">
+                                <div class="form-group">
+                                  <label for="title" >title</label>
+                                  <input type="text" class="form-control" placeholder="Title" formControlName="title">
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">text</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="description"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Qualifications</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="qualifications"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Technologies Required</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="technologiesReq"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Diploma Required</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="diplomaReq"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Job Type</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="jobType"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Region</label>
+                                  <textarea class="form-control"  placeholder="text" rows="3" formControlName="region"></textarea>
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Places Available</label>
+                                  <input class="form-control"  placeholder="text" rows="3" formControlName="placesAvai" type="number">
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Created</label>
+                                  <input class="form-control"  placeholder="text" rows="3" formControlName="created_at" type="date">
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+                                <div class="form-group">
+                                  <label for="Text">Expires At</label>
+                                  <input class="form-control"  placeholder="text" rows="3" formControlName="expirationDate" type="date">
+                                </div>
+                              </div>
+                              <div class="timeline-body">
+  
+                              <div class="form-group">
+                                  <label  for="exampleSelect">Categories</label>
+                                  <select formControlName="fields"  class="form-control" id="exampleSelect">
+                                      <option  *ngFor="let f of field" [value]="f._id">{{f.name}}</option>
+  
+                                  </select>
+                              </div>
+                              </div>
+  
+                         
+                                <br />
+                                <br />
+                                <button type="submit" class="btn btn-success btn-lg btn-block" (click)="addPub()">send</button>
+                            </form>    
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary " data-dismiss="modal" >Cancel</button>
+                        <button  type="submit" class="btn btn-primary" (click)="addPub()">Post</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="profile-info col-md-9">
+        <div class="panel">
+            
+        </div>
+        <div class="panel">
+            <div class="bio-graph-heading">
+              {{profileinfo.description}}
+            </div>
+            <div class="panel-body bio-graph-info">
+                <h1>Bio Graph</h1>
+                <div class="row">
+                    <div class="bio-row">
+                        <p><span> Name</span>: {{profileinfo.companyName}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Adress </span>: {{profileinfo.companyAddress}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Country </span>: {{profileinfo.region}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Created</span>: {{profileinfo.creationDate}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Sector </span>: {{profileinfo.sector}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Email </span>: {{profileinfo.email}}</p>
+                    </div>
+                    <div class="bio-row">
+                        <p><span>Mobile </span>: {{profileinfo.tel}}</p>
+                    </div>
+                    <div class="bio-row">
+                      <p><span>Type </span>: {{profileinfo.type}}</p>
+                  </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-body">
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-body">
+                          
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-body">
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="bio-chart">
+                                <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="50" data-fgcolor="#cba4db" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(203, 164, 219); padding: 0px; -webkit-appearance: none; background: none;"></div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
-  <div class="profile-info col-md-9">
-      <div class="panel">
-          <form >
-              <textarea (change)="doTextareaValueChange($event)"  placeholder="Whats in your mind today?" rows="2" class="form-control input-lg p-text-area">{{tempName}}</textarea>
-          </form>
-          <footer class="panel-footer">
-              <button class="btn btn-warning pull-right " data-toggle="modal" data-target="#exampleModal"  >Post</button>
-              <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Make New Job Offer</h5>
-                      <button type="button" class="close ClosePost" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                        <form role="form" [formGroup]="add">
-                            <div class="timeline-heading">
-                              <div class="form-group">
-                                <label for="title" >title</label>
-                                <input type="text" class="form-control" placeholder="Title" formControlName="title">
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">text</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="description"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Qualifications</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="qualifications"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Technologies Required</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="technologiesReq"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Diploma Required</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="diplomaReq"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Job Type</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="jobType"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Region</label>
-                                <textarea class="form-control"  placeholder="text" rows="3" formControlName="region"></textarea>
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Places Available</label>
-                                <input class="form-control"  placeholder="text" rows="3" formControlName="placesAvai" type="number">
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Created</label>
-                                <input class="form-control"  placeholder="text" rows="3" formControlName="created_at" type="date">
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-                              <div class="form-group">
-                                <label for="Text">Expires At</label>
-                                <input class="form-control"  placeholder="text" rows="3" formControlName="expirationDate" type="date">
-                              </div>
-                            </div>
-                            <div class="timeline-body">
-
-                            <div class="form-group">
-                                <label  for="exampleSelect">Categories</label>
-                                <select formControlName="fields"  class="form-control" id="exampleSelect">
-                                    <option  *ngFor="let f of field" [value]="f._id">{{f.name}}</option>
-
-                                </select>
-                            </div>
-                            </div>
-
-                       
-                              <br />
-                              <br />
-                              <button type="submit" class="btn btn-success btn-lg btn-block" (click)="addPub()">send</button>
-                          </form>    
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary " data-dismiss="modal" >Cancel</button>
-                      <button  type="submit" class="btn btn-primary" (click)="addPub()">Post</button>
-                    </div>
-                  </div>
-                </div>
+  </div>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        
+        
+        
+        
+        <div class="panel">
+          <div class="panel-body">
+              <div class="fb-user-thumb">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="">
               </div>
-              <ul class="nav nav-pills">
-                  <li>
-                      <a href="#"><i class="fa fa-map-marker"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-camera"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class=" fa fa-film"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-microphone"></i></a>
-                  </li>
-              </ul>
-          </footer>
-      </div>
-      <div class="panel">
-          <div class="bio-graph-heading">
-            {{profileinfo.description}}
-          </div>
-          <div class="panel-body bio-graph-info">
-              <h1>Bio Graph</h1>
-              <div class="row">
-                  <div class="bio-row">
-                      <p><span> Name</span>: {{profileinfo.companyName}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Adress </span>: {{profileinfo.companyAddress}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Country </span>: {{profileinfo.region}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Created</span>: {{profileinfo.creationDate}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Sector </span>: {{profileinfo.sector}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Email </span>: {{profileinfo.email}}</p>
-                  </div>
-                  <div class="bio-row">
-                      <p><span>Mobile </span>: {{profileinfo.tel}}</p>
-                  </div>
-                  <div class="bio-row">
-                    <p><span>Type </span>: {{profileinfo.type}}</p>
-                </div>
-                  
+              <div class="fb-user-details">
+                  <h3><a href="#" class="#">{{profileinfo.companyName}}</a></h3>
+                  <p>7 minutes ago near Alaska, USA</p>
               </div>
-          </div>
-      </div>
-      <div>
-          <div class="row">
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                         
-                          
-                      </div>
+              <div class="clearfix"></div>
+              <p class="fb-user-status">John is world famous professional photographer.  with forward thinking clients to create beautiful, honest and amazing things that bring positive results. John is world famous professional photographer.  with forward thinking clients to create beautiful, honest and amazing things that bring positive results.
+              </p>
+              <div class="fb-status-container fb-border">
+                  <div class="fb-time-action">
+                      <a href="#" title="Like this">Like</a>
+                      <span>-</span>
+                      <a href="#" title="Leave a comment">Comments</a>
+                      <span>-</span>
+                      <a href="#" title="Send this to friend or post it on your time line">Share</a>
                   </div>
               </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                        
-                        
-                      </div>
+        
+        
+              <div class="fb-status-container fb-border fb-gray-bg">
+                  <div class="fb-time-action like-info">
+                      <a href="#">Jhon Due,</a>
+                      <a href="#">Danieal Kalion</a>
+                      <span>and</span>
+                      <a href="#">40 more</a>
+                      <span>like this</span>
                   </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          
-                         
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="panel">
-                      <div class="panel-body">
-                          <div class="bio-chart">
-                              <div style="display:inline;width:100px;height:100px;"><canvas width="100" height="100px"></canvas><input class="knob" data-width="100" data-height="100" data-displayprevious="true" data-thickness=".2" value="50" data-fgcolor="#cba4db" data-bgcolor="#e8e8e8" style="width: 54px; height: 33px; position: absolute; vertical-align: middle; margin-top: 33px; margin-left: -77px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial; text-align: center; color: rgb(203, 164, 219); padding: 0px; -webkit-appearance: none; background: none;"></div>
+        
+                  <ul class="fb-comments">
+                      <li>
+                          <a href="#" class="cmt-thumb">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                          </a>
+                          <div class="cmt-details">
+                              <a href="#">Jhone due</a>
+                              <span> is world famous professional photographer.  with forward thinking clients to create beautiful, </span>
+                              <p>40 minutes ago - <a href="#" class="like-link">Like</a></p>
                           </div>
-                        
-                      </div>
-                  </div>
+                      </li>
+                      <li>
+                          <a href="#" class="cmt-thumb">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                          </a>
+                          <div class="cmt-details">
+                              <a href="#">Tawseef</a>
+                              <span> is world famous professional photographer.  with forward thinking clients to create beautiful, </span>
+                              <p>34 minutes ago - <a href="#" class="like-link">Like</a></p>
+                          </div>
+                      </li>
+        
+                      <li>
+                          <a href="#" class="cmt-thumb">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="">
+                          </a>
+                          <div class="cmt-details">
+                              <a href="#">Jhone due</a>
+                              <span> is world famous professional photographer.   </span>
+                              <p>15 minutes ago - <a href="#" class="like-link">Like</a></p>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="#" class="cmt-thumb">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="">
+                          </a>
+                          <div class="cmt-details">
+                              <a href="#">Tawseef</a>
+                              <span> thinking clients to create beautiful world famous professional photographer.  </span>
+                              <p>2 minutes ago - <a href="#" class="like-link">Like</a></p>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="#" class="cmt-thumb">
+                              <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="">
+                          </a>
+                          <div class="cmt-form">
+                              <textarea class="form-control" placeholder="Write a comment..." name=""></textarea>
+                          </div>
+                      </li>
+                  </ul>
+                  <div class="clearfix"></div>
               </div>
           </div>
-      </div>
+        </div>
   </div>
 </div>
-</div>
-<!-- <app-jobs></app-jobs> -->
-<app-footer-c></app-footer-c>
+
+  <!-- <app-jobs></app-jobs> -->
+  <app-footer-c></app-footer-c>

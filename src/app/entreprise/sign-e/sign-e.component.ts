@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ServiceGService } from 'src/app/entreprise/service/service-g.service';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -67,13 +68,27 @@ export class SignEComponent implements OnInit {
     //   console.log("Password does not match ")
     // }
     this.service.recruiter_register(this.RecruiterRegisterForm.value).subscribe(res=>{
+      $('.ClosePost').trigger('click')
       if(res==null){
-        alert("Registration failed");
+        Swal.fire(
+          'Oops',
+          'Something went off :( ',
+          'error'
+        )
+        
+        // alert("Registration failed");
       }else{
+        Swal.fire(
+          'Registered!',
+          'Your account has been created successfully',
+          'success'
+        )
         console.log("Account created Succefully");
 
       this.RecruiterRegisterForm.reset()
       }
+      
+      
       
       
         

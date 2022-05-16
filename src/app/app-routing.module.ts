@@ -46,7 +46,7 @@ import { NavbarComponent } from './entreprise/navbar/navbar.component';
 
 
 const routes: Routes = [
-  {path:'acceuil', component:AcceuilComponent,children:[{path:'',component:LayoutCComponent},
+  {path:'', component:AcceuilComponent,children:[{path:'',component:LayoutCComponent},
   {path:"signE",component:SignEComponent},
   {path:"loginE",component:LoginEComponent},{path:"about",component:AboutUsComponent},
  ]},
@@ -75,7 +75,7 @@ const routes: Routes = [
   
   
 
-  {path:'', component:HomeComponent, children:[{path:'',component:LayoutComponent},
+  {path:'admin', component:HomeComponent, children:[{path:'',component:LayoutComponent},
   {path:'field',component:AdminFieldComponent},
   {path:"pubs",component:PubsComponent},
   {path:"candidat",component:CandidatTableComponent},

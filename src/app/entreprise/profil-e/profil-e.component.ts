@@ -10,6 +10,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import * as bootstrap from "bootstrap"
+import { Company } from 'src/app/model/company';
 @Component({
   selector: 'app-profil-e',
   templateUrl: './profil-e.component.html',
@@ -22,6 +23,8 @@ export class ProfilEComponent implements OnInit {
   }
 
   pub!: Pub[];
+  edit!:FormGroup
+  company!:Company
   pubs!:Pub[];
   field!:Field[]
   username:any
@@ -133,6 +136,11 @@ export class ProfilEComponent implements OnInit {
       }
     }
     )
+  }
+  update(){
+    
+
+    return this.service.updatePub(this.id,this.edit.value).subscribe(()=>this.router.navigate(['/profilE']))
   }
   
 
